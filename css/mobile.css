@@ -1,1 +1,68 @@
-#no data
+.beavers-mobile.sheet.actor.character {
+    min-width:300px;
+    width:500px;
+}
+.beavers-mobile.sheet .sheet-navigation .item[data-tab=biography]{
+    display:none;
+}
+.beavers-mobile.sheet .window-content .tab[data-tab=biography]{
+    display:none;
+}
+.beavers-mobile.sheet .attributes .hit-dice{
+    display:none;
+}
+.beavers-mobile.sheet .attributes .initiative{
+    display:none;
+}
+.beavers-mobile.sheet .sheet-header .summary{
+    display:none;
+}
+.beavers-mobile.dnd5e.sheet.actor .sheet-header h1.charname input{
+    margin:0px 10px;
+}
+
+.beavers-mobile.sheet .attribute-footer .rest{
+    display: inline-block;
+    margin: 0 2px 0 0;
+    padding: 0 3px;
+    font-size: 10px;
+    line-height: 16px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+    text-align:center;
+    flex:0 0 50px;
+}
+
+.beavers-mobile.sheet .sheet-header .image{
+    max-width:140px;
+    flex:0 0 140px;
+    position:relative;
+}
+.beavers-mobile.sheet.actor.character .sheet-header img.profile {
+    flex: 0 0 140px;
+    max-width: 140px;
+    height: 140px;
+}
+.beavers-mobile.sheet .sheet-header .image .moving{
+    position:absolute;
+    font-size:x-large;
+    left:58px;
+    width:24px;
+    height:24px;
+    top:58px;
+    color:grey;
+}
+
+.beavers-mobile.sheet .sheet-header .image .moving.up{
+    top:0px;
+}
+.beavers-mobile.sheet .sheet-header .image .moving.down{
+    top:116px;
+}
+.beavers-mobile.sheet .sheet-header .image .moving.left{
+    left:0px;
+}
+.beavers-mobile.sheet .sheet-header .image .moving.right{
+    left:116px;
+}

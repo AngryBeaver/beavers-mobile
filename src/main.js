@@ -1,5 +1,6 @@
 import {Settings} from "./Settings.js";
 import {CombatTrackerEnhancements} from "./CombatTrackerEnhancements.js";
+import {Mobile5eSheet} from "./Mobile5eSheet.js";
 
 Hooks.once('init', async function () {
     Settings.init();
@@ -21,4 +22,9 @@ Hooks.on('canvasInit', () => {
     if(Settings.get(Settings.HIDE_CANVAS)){
         $("canvas").hide();
     }
+});
+
+Actors.registerSheet("dnd5e", Mobile5eSheet, {
+    types: ["character"],
+    makeDefault: false,
 });
