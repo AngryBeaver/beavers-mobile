@@ -1,7 +1,7 @@
 {
 	"name": "beavers-mobile",
 	"title": "Beaver's Mobile",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Enhance playing locally shared map as touchscreen while everyone has a tablet with character sheet",
 	"devDir": "C:\\Users\\User\\AppData\\Local\\FoundryVTT\\Data\\modules",
 	"main": "src/main.js",
