@@ -28,7 +28,6 @@ The Map is shown on a table screen and that is the place where communication sho
 ### Moving
 [mobile-token-movement-controls](https://gitlab.com/MatthijsKok/mobile-token-movement/-/blob/main/scripts/mobile-token-movement-controls.js)
 - Allow moving your token but in combination with canvas.
-- This module aims to have the char-sheet open so movement is within character-module
 
 
 ## Note
