@@ -36,4 +36,4 @@ that is why this module comes with a hide canvas option.
 
 
 # Credits
-project structure is copied from midi-qol (gulpfile,package.json,my.conf.js,tsconcig.json)
+project structure is copied from midi-qol (gulpfile,package.json,tsconcig.json)
