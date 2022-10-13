@@ -42,7 +42,9 @@ that is why this module comes with a hide canvas option.
 ### Black Screen on mobile devices
 if you have a blackbox covering your screen or parts of it try to disable all 3d modules like dice so nice.
 You need to disable them for the mobile devicecs if possible then you can turn it on again for the main screen.
-
+### Messed up styles
+it is not that good in combination with [mobile improvements](https://gitlab.com/fvtt-modules-lab/mobile-improvements)
+which is a way better mobile module than mine but it just did not fit me.
 
 # Credits
 project structure is copied from midi-qol (gulpfile,package.json,tsconcig.json)
