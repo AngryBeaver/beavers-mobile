@@ -4,6 +4,10 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
 
     actor:Actor;
     canvas;
+    touchStart?:Touch
+    touchNow?:Touch
+    interval?:number
+
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -67,7 +71,41 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
         image.append(up);
         image.append(upLeft);
     }
+
     _addMovementListener(html){
+        $(html).find(".sheet-header .image").on("touchstart",(e: Event)=>{
+            this.touchStart = this._getTouchFrom(e);
+            this.interval = window.setInterval(()=>{
+                if(this.touchNow && this.touchStart){
+
+                    const diffX = this.touchNow.clientX-this.touchStart.clientX;
+                    const diffY = this.touchNow.clientY-this.touchStart.clientY;
+                    let x = 0;
+                    let y = 0;
+                    console.log(diffX);
+                    console.log(this.touchStart);
+                    if(Math.abs(diffX) > 30){
+                        x = Math.sign(diffX);
+                    }
+                    if(Math.abs(diffY) > 30){
+                        y = Math.sign(diffY);
+                    }
+                    this._move(x,y);
+                }
+            },500)
+        });
+
+        $(html).find(".sheet-header .image").on("touchmove",(e:Event)=>{
+            this.touchNow = this._getTouchFrom(e);
+
+        });
+
+        $(html).find(".sheet-header .image").on("touchend",(e:Event)=>{
+            window.clearInterval(this.interval);
+            this.touchStart = undefined;
+            this.touchNow = undefined;
+        });
+
         $(html).find(".sheet-header .image .fa-up-left").on("click",(e)=>{
             this._move(-1, -1)
         });
@@ -94,27 +132,40 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
         });
     }
 
+    _getTouchFrom(e: Event):Touch{
+        // @ts-ignore
+        const te: TouchEvent = e.originalEvent;
+        return te.touches[0];
+    }
+
     _getToken():Token{
         return this.canvas.tokens?.objects?.children.find(token => token?.actor.id === this.actor.id);
     }
 
     _move(x, y) {
-        let t = this._getToken();
-        let newX = t.x + this.canvas.scene.dimensions.size * x
-        let newY = t.y + this.canvas.scene.dimensions.size * y
-        const newPoint = this.canvas.grid.getSnappedPosition(newX, newY)
-        if (!t.checkCollision(newPoint)) {
-            t.document.update(newPoint).then(
-                this.canvas.animatePan({
-                    duration: 250,
-                    x: newPoint.x + t.w / 2,
-                    y: newPoint.y + t.h / 2,
-                    scale: this.canvas.scene._viewPosition.scale,
-                })
-            );
+        const token = this._getToken();
+        // @ts-ignore
+        const center = token.getCenter(token.x, token.y);
+        // @ts-ignore
+        const collisionPoint = token.getMovementAdjustedPoint(center);
+        collisionPoint.x = collisionPoint.x + this.canvas.scene.dimensions.size * x;
+        collisionPoint.y = collisionPoint.y + this.canvas.scene.dimensions.size * y;
+
+        const movePoint = {
+            x : token.x + this.canvas.scene.dimensions.size * x,
+            y : token.y + this.canvas.scene.dimensions.size * y
+        }
+        if (!token.checkCollision(collisionPoint) && this._checkSceneCollision(collisionPoint)) {
+            token.document.update(movePoint);
         }
     }
 
-
+    _checkSceneCollision(collisionPoint){
+        return !(collisionPoint.x < this.canvas.scene.x
+            && collisionPoint.x > 0
+            && collisionPoint.y < this.canvas.scene.y
+            && collisionPoint.y > 0);
+    }
 }
+
 

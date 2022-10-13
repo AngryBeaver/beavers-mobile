@@ -9,14 +9,19 @@ The aim is that the players play on the screen while using their devices to inte
 I do not want a lan party so best would be if they do not have any canvas at all rendered on their devices.
 The Map is shown on a table screen and that is the place where communication should happen.
 
+players view on tablet
+![img.png](pictures/main.png)
+
+
 ## Features
 - targeting without canvas 
 
 ![img.png](pictures/img.png)
 - slim mobile sheet 500px that works good on 90 degrees rotated tablets
-- token movement via sheet
+- token movement via sheet on click or touch on char-image and using it like a 
+  - ! gamepad control-stick
 
-![img.png](pictures/img2.png)
+![img.png](img.png)
 ## Similar Modules
 ### Overall
 [DDB-GameLog](https://github.com/IamWarHead/ddb-game-log)
@@ -24,15 +29,19 @@ The Map is shown on a table screen and that is the place where communication sho
 - has limitations as you are not able to target and thus using automation modules or move. 
 ### Targeting
 [midi-qol](https://gitlab.com/tposney/midi-qol)
-- Can enable late targeting that would allow targeting without canvas sadly it is currently broken.
+- Can enable late targeting that would allow targeting without canvas but it is currently broken.
 ### Moving
 [mobile-token-movement-controls](https://gitlab.com/MatthijsKok/mobile-token-movement/-/blob/main/scripts/mobile-token-movement-controls.js)
-- Allow moving your token but in combination with canvas.
+- Allow moving your token but not on char-sheet and collision is not detected correctly.
 
 
-## Note
-CoreSetting: Disable canvas will break mostly all interaction with tokens e.g. attacking,targeting etc. 
+## Troubleshooting
+### Disable canvas CoreSetting
+Disable canvas will break mostly all interaction with tokens e.g. attacking,targeting etc. 
 that is why this module comes with a hide canvas option.
+### Black Screen on mobile devices
+if you have a blackbox covering your screen or parts of it try to disable all 3d modules like dice so nice.
+You need to disable them for the mobile devicecs if possible then you can turn it on again for the main screen.
 
 
 # Credits
