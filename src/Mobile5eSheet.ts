@@ -82,8 +82,6 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
                     const diffY = this.touchNow.clientY-this.touchStart.clientY;
                     let x = 0;
                     let y = 0;
-                    console.log(diffX);
-                    console.log(this.touchStart);
                     if(Math.abs(diffX) > 30){
                         x = Math.sign(diffX);
                     }
@@ -143,6 +141,9 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
     }
 
     _move(x, y) {
+        if(!(game instanceof Game) || game.paused){
+            return;
+        }
         const token = this._getToken();
         // @ts-ignore
         const center = token.getCenter(token.x, token.y);
