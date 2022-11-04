@@ -45,6 +45,8 @@ You need to disable them for the mobile devicecs if possible then you can turn i
 ### Messed up styles
 it is not that good in combination with [mobile improvements](https://gitlab.com/fvtt-modules-lab/mobile-improvements)
 which is a way better mobile module than mine but it just did not fit me.
+### Can't login on mobile
+Sometime mobile devices have problem when logging into foundry. The trick is do not hit enter after password. While the keyboard popup is still up press the login button. That at least helped me on some devices. 
 
 # Credits
 project structure is copied from midi-qol (gulpfile,package.json,tsconcig.json)
