@@ -48,5 +48,14 @@ which is a way better mobile module than mine but it just did not fit me.
 ### Can't login on mobile
 Sometime mobile devices have problem when logging into foundry. The trick is do not hit enter after password. While the keyboard popup is still up press the login button. That at least helped me on some devices. 
 
+## Modules you should consider to enable
+### TouchVTT
+This is the main module for mobile devices to make touch screens functional.
+### MidiQol
+This is a module to automate attack and damage. My suggestion is to use maximal automation with it so the device user does not need to confirm any other popup.
+Also when this issue is solved: https://gitlab.com/tposney/midi-qol/-/issues/1053. The gamemaster or map device should be able to draw the MeasuredTemplate for spells that require it.(as this module intent that the user device does not need canvas at all).
+
+
+
 # Credits
 project structure is copied from midi-qol (gulpfile,package.json,tsconcig.json)
