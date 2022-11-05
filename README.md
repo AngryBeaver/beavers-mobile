@@ -52,7 +52,7 @@ Sometime mobile devices have problem when logging into foundry. The trick is do 
 ### TouchVTT
 This is the main module for mobile devices to make touch screens functional.
 ### MidiQol
-This is a module to automate attack and damage. My suggestion is to use maximal automation with it so the device user does not need to confirm any other popup.
+This is a module to automate attack and damage. My suggestion is to use maximal automation with it so the user devices do not need to confirm any other popup.
 Also when this issue is solved: https://gitlab.com/tposney/midi-qol/-/issues/1053. The gamemaster or map device should be able to draw the MeasuredTemplate for spells that require it.(as this module intent that the user device does not need canvas at all).
 
 
