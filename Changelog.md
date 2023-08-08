@@ -1,3 +1,5 @@
+# 1.0.1
+- fix bug in non dnd5e systems.
 # 1.0.0
 - module is no longer for dnd5e only. but still has a dnd5e slim sheet.
 - you can add a virtual gamepad to control a token (you need a gamepad module e.g. [beavers-gamepad](https://github.com/AngryBeaver/beavers-gamepad))

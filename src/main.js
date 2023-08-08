@@ -1,6 +1,5 @@
 import {Settings} from "./Settings.js";
 import {CombatTrackerEnhancements} from "./CombatTrackerEnhancements.js";
-import {Mobile5eSheet} from "./Mobile5eSheet.js";
 import {VirtualGamepad} from "./VirtualGamepad.js";
 import {VirtualGamepadApp} from "./VirtualGamepadApp.js";
 import {GamepadSimulator} from "./GamepadSimulator.js";
@@ -14,9 +13,12 @@ navigator.getGamepads = function(){
 
 Hooks.on("ready", async function(){
     if(game.system.id === "dnd5e"){
-        Actors.registerSheet("dnd5e", Mobile5eSheet, {
-            types: ["character"],
-            makeDefault: false,
+        import('./Mobile5eSheet.js').then(({Mobile5eSheet})=>
+        {
+            Actors.registerSheet("dnd5e", Mobile5eSheet, {
+                types: ["character"],
+                makeDefault: false,
+            });
         });
     }
     game[NAMESPACE].Settings.ready();

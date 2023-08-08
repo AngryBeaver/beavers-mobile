@@ -1,18 +1,17 @@
-
 // @ts-ignore
 export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacter {
 
-    actor:Actor;
+    actor: Actor;
     canvas;
-    touchStart?:Touch
-    touchNow?:Touch
-    interval?:number
-    tokenMovement:any
+    touchStart?: Touch
+    touchNow?: Touch
+    interval?: number
+    tokenMovement: any
 
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            classes: ["beavers-mobile","dnd5e", "sheet", "actor", "character"],
+            classes: ["beavers-mobile", "dnd5e", "sheet", "actor", "character"],
             width: 500,
             height: 1040
         });
@@ -25,25 +24,25 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
         return context;
     }
 
-    activateListeners(html){
+    activateListeners(html) {
         super.activateListeners(html);
         this._rerender(html);
         this._addMovementListener(html);
     }
 
-    _rerender(html){
+    _rerender(html) {
         this._moveRest(html);
         this._moveCurrency(html);
         this._addMovement(html);
     }
 
-    _moveRest(html){
+    _moveRest(html) {
         const rest = $(html).find(".hit-dice .attribute-footer");
         $(html).find(".attributes .movement .attribute-footer").remove();
         $(html).find(".attributes .movement ").append(rest);
     }
 
-    _moveCurrency(html){
+    _moveCurrency(html) {
         $(html).find(".currency .pp").text("pp");
         $(html).find(".currency .gp").text("gp");
         $(html).find(".currency .ep").text("ep");
@@ -51,7 +50,7 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
         $(html).find(".currency .cp").text("cp");
     }
 
-    _addMovement(html){
+    _addMovement(html) {
         const upLeft = "<a class='moving up left'><i class='fa-light fa-up-left'></i></a>";
         const up = "<a class='moving up'><i class='fa-light fa-up'></i></a>";
         const upRight = "<a class='moving up right'><i class='fa-light fa-up-right'></i></a>";
@@ -74,71 +73,68 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
         image.append(upLeft);
     }
 
-    _addMovementListener(html){
-        $(html).find(".sheet-header .image").on("touchstart",(e: Event)=>{
+    _addMovementListener(html) {
+        $(html).find(".sheet-header .image").on("touchstart", (e: Event) => {
             this.touchStart = this._getTouchFrom(e);
-            this.interval = window.setInterval(()=>{
-                if(this.touchNow && this.touchStart){
+            this.interval = window.setInterval(() => {
+                if (this.touchNow && this.touchStart) {
 
-                    const diffX = this.touchNow.clientX-this.touchStart.clientX;
-                    const diffY = this.touchNow.clientY-this.touchStart.clientY;
+                    const diffX = this.touchNow.clientX - this.touchStart.clientX;
+                    const diffY = this.touchNow.clientY - this.touchStart.clientY;
                     let x = 0;
                     let y = 0;
-                    if(Math.abs(diffX) > 30){
+                    if (Math.abs(diffX) > 30) {
                         x = Math.sign(diffX);
                     }
-                    if(Math.abs(diffY) > 30){
+                    if (Math.abs(diffY) > 30) {
                         y = Math.sign(diffY);
                     }
-                    this.tokenMovement.move(x,y);
+                    this.tokenMovement.move(x, y);
                 }
-            },500)
+            }, 500)
         });
 
-        $(html).find(".sheet-header .image").on("touchmove",(e:Event)=>{
+        $(html).find(".sheet-header .image").on("touchmove", (e: Event) => {
             this.touchNow = this._getTouchFrom(e);
 
         });
 
-        $(html).find(".sheet-header .image").on("touchend",(e:Event)=>{
+        $(html).find(".sheet-header .image").on("touchend", (e: Event) => {
             window.clearInterval(this.interval);
             this.touchStart = undefined;
             this.touchNow = undefined;
         });
 
-        $(html).find(".sheet-header .image .fa-up-left").on("click",(e)=>{
+        $(html).find(".sheet-header .image .fa-up-left").on("click", (e) => {
             this.tokenMovement.move(-1, -1)
         });
-        $(html).find(".sheet-header .image .fa-up").on("click",(e)=>{
+        $(html).find(".sheet-header .image .fa-up").on("click", (e) => {
             this.tokenMovement.move(0, -1)
         });
-        $(html).find(".sheet-header .image .fa-up-right").on("click",(e)=>{
+        $(html).find(".sheet-header .image .fa-up-right").on("click", (e) => {
             this.tokenMovement.move(1, -1)
         });
-        $(html).find(".sheet-header .image .fa-left").on("click",(e)=>{
+        $(html).find(".sheet-header .image .fa-left").on("click", (e) => {
             this.tokenMovement.move(-1, 0)
         });
-        $(html).find(".sheet-header .image .fa-right").on("click",(e)=>{
+        $(html).find(".sheet-header .image .fa-right").on("click", (e) => {
             this.tokenMovement.move(1, 0)
         });
-        $(html).find(".sheet-header .image .fa-down-left").on("click",(e)=>{
+        $(html).find(".sheet-header .image .fa-down-left").on("click", (e) => {
             this.tokenMovement.move(-1, 1)
         });
-        $(html).find(".sheet-header .image .fa-down").on("click",(e)=>{
+        $(html).find(".sheet-header .image .fa-down").on("click", (e) => {
             this.tokenMovement.move(0, 1)
         });
-        $(html).find(".sheet-header .image .fa-down-right").on("click",(e)=>{
+        $(html).find(".sheet-header .image .fa-down-right").on("click", (e) => {
             this.tokenMovement.move(1, 1)
         });
     }
 
-    _getTouchFrom(e: Event):Touch{
+    _getTouchFrom(e: Event): Touch {
         // @ts-ignore
         const te: TouchEvent = e.originalEvent;
         return te.touches[0];
     }
-
-
 }
-
 
