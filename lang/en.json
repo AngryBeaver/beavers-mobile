@@ -6,8 +6,12 @@
         "hint": "Enable to add a Target icon next to each Combatant in Combat Tracker"
       },
       "hideCanvas": {
-        "name": "Hide Canvas",
+        "name": "Activate Mobile",
         "hint": "We do not want a local lan party, do we? Just a character sheet and some interactions. Hide Canvas for mobile device users"
+      },
+      "virtualGamepad": {
+        "name": "enable VirtualGamepad",
+        "hint": "This will enable one virtualGamepad controller stick. Combined with beavers-gamepad you can use this to control a token"
       }
     }
   }

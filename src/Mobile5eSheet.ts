@@ -7,6 +7,7 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
     touchStart?:Touch
     touchNow?:Touch
     interval?:number
+    tokenMovement:any
 
 
     static get defaultOptions() {
@@ -20,6 +21,7 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
     async getData() {
         const context = await super.getData();
         this.canvas = canvas;
+        this.tokenMovement = beaversSystemInterface.tokenMovementCreate(this.actor.uuid);
         return context;
     }
 
@@ -88,7 +90,7 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
                     if(Math.abs(diffY) > 30){
                         y = Math.sign(diffY);
                     }
-                    this._move(x,y);
+                    this.tokenMovement.move(x,y);
                 }
             },500)
         });
@@ -105,28 +107,28 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
         });
 
         $(html).find(".sheet-header .image .fa-up-left").on("click",(e)=>{
-            this._move(-1, -1)
+            this.tokenMovement.move(-1, -1)
         });
         $(html).find(".sheet-header .image .fa-up").on("click",(e)=>{
-            this._move(0, -1)
+            this.tokenMovement.move(0, -1)
         });
         $(html).find(".sheet-header .image .fa-up-right").on("click",(e)=>{
-            this._move(1, -1)
+            this.tokenMovement.move(1, -1)
         });
         $(html).find(".sheet-header .image .fa-left").on("click",(e)=>{
-            this._move(-1, 0)
+            this.tokenMovement.move(-1, 0)
         });
         $(html).find(".sheet-header .image .fa-right").on("click",(e)=>{
-            this._move(1, 0)
+            this.tokenMovement.move(1, 0)
         });
         $(html).find(".sheet-header .image .fa-down-left").on("click",(e)=>{
-            this._move(-1, 1)
+            this.tokenMovement.move(-1, 1)
         });
         $(html).find(".sheet-header .image .fa-down").on("click",(e)=>{
-            this._move(0, 1)
+            this.tokenMovement.move(0, 1)
         });
         $(html).find(".sheet-header .image .fa-down-right").on("click",(e)=>{
-            this._move(1, 1)
+            this.tokenMovement.move(1, 1)
         });
     }
 
@@ -136,37 +138,7 @@ export class Mobile5eSheet extends dnd5e.applications.actor.ActorSheet5eCharacte
         return te.touches[0];
     }
 
-    _getToken():Token{
-        return this.canvas.tokens?.objects?.children.find(token => token?.actor.id === this.actor.id);
-    }
 
-    _move(x, y) {
-        if(!(game instanceof Game) || game.paused){
-            return;
-        }
-        const token = this._getToken();
-        // @ts-ignore
-        const center = token.getCenter(token.x, token.y);
-        // @ts-ignore
-        const collisionPoint = token.getMovementAdjustedPoint(center);
-        collisionPoint.x = collisionPoint.x + this.canvas.scene.dimensions.size * x;
-        collisionPoint.y = collisionPoint.y + this.canvas.scene.dimensions.size * y;
-
-        const movePoint = {
-            x : token.x + this.canvas.scene.dimensions.size * x,
-            y : token.y + this.canvas.scene.dimensions.size * y
-        }
-        if (!token.checkCollision(collisionPoint) && this._checkSceneCollision(collisionPoint)) {
-            token.document.update(movePoint);
-        }
-    }
-
-    _checkSceneCollision(collisionPoint){
-        return !(collisionPoint.x < this.canvas.scene.x
-            && collisionPoint.x > 0
-            && collisionPoint.y < this.canvas.scene.y
-            && collisionPoint.y > 0);
-    }
 }
 
 

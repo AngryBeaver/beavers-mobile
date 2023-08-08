@@ -1,9 +1,9 @@
 {
 	"name": "beavers-mobile",
 	"title": "Beaver's Mobile",
-	"version": "0.0.7",
-	"description": "Enhance playing locally shared map as touchscreen while everyone has a tablet with character sheet",
-	"devDir": "C:\\Users\\User\\AppData\\Local\\FoundryVTT\\Data\\modules",
+	"version": "1.0.0",
+	"description": "A Module to enhance playing locally with sheets on tablets and map screen.#Local Coop",
+	"devDir": "C:\\Users\\Riess\\AppData\\Local\\FoundryVTT\\Data\\modules",
 	"main": "src/main.js",
 	"scripts": {
 		"build": "npx gulp",
@@ -23,8 +23,9 @@
 		"printWidth": 120
 	},
 	"devDependencies": {
+		"beavers-system-interface": "^2.1.4",
 		"@ethaks/fvtt-quench": "^0.6.0",
-		"@league-of-foundry-developers/foundry-vtt-types": "^0.8.8-9",
+		"@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
 		"@types/jest": "^27.4.1",
 		"del": "^6.0.0",
 		"gulp": "^4.0.2",

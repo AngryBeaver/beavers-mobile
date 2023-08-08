@@ -1,12 +1,32 @@
-export class Settings {
+import {NAMESPACE} from "./main.js";
+import {VirtualGamepadApp} from "./VirtualGamepadApp.js";
 
-    static NAMESPACE = "beavers-mobile";
+export class Settings {
     static ADD_COMBAT_TRACKER_TARGET = "addCombatTrackerTarget"
     static HIDE_CANVAS = "hideCanvas"
+    static VIRTUAL_GAMEPAD = "virtualGamepad"
 
-    static init() {
+    interval:number;
+    virtualGamepadApp:Application;
+
+    init() {
         if (game instanceof Game) {
-            game.settings.register(this.NAMESPACE, this.ADD_COMBAT_TRACKER_TARGET, {
+            game.settings.register(NAMESPACE, Settings.VIRTUAL_GAMEPAD, {
+                name: game.i18n.localize('beaversMobile.settings.virtualGamepad.name'),
+                hint: game.i18n.localize('beaversMobile.settings.virtualGamepad.hint'),
+                scope: "client",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange:(value)=>{
+                    if(value){
+                        this._showVirtualGamepad();
+                    }else{
+                        this._closeVirtualGamepad();
+                    }
+                }
+            });
+            game.settings.register(NAMESPACE, Settings.ADD_COMBAT_TRACKER_TARGET, {
                 name: game.i18n.localize('beaversMobile.settings.addCombatTrackerTarget.name'),
                 hint: game.i18n.localize('beaversMobile.settings.addCombatTrackerTarget.hint'),
                 scope: "world",
@@ -14,7 +34,7 @@ export class Settings {
                 default: true,
                 type: Boolean,
             });
-            game.settings.register(this.NAMESPACE, this.HIDE_CANVAS, {
+            game.settings.register(NAMESPACE, Settings.HIDE_CANVAS, {
                 name: game.i18n.localize('beaversMobile.settings.hideCanvas.name'),
                 hint: game.i18n.localize('beaversMobile.settings.hideCanvas.hint'),
                 scope: "client",
@@ -23,9 +43,9 @@ export class Settings {
                 type: Boolean,
                 onChange:(value)=>{
                     if(value){
-                        $("canvas").hide();
+                        this._hideCanvas();
                     }else{
-                        $("canvas").show();
+                        this._showCanvas();
                     }
                 }
             });
@@ -33,11 +53,48 @@ export class Settings {
 
     }
 
-
     static get(key){
         if (game instanceof Game) {
-            return game.settings.get(this.NAMESPACE, key);
+            return game.settings.get(NAMESPACE, key);
         }
     };
+
+    ready(){
+        if(Settings.get(Settings.HIDE_CANVAS)){
+           this._hideCanvas();
+        }
+        if(Settings.get(Settings.VIRTUAL_GAMEPAD)){
+            this._showVirtualGamepad();
+        }
+
+    }
+
+    private _showVirtualGamepad(){
+        if(!this.virtualGamepadApp) {
+            this.virtualGamepadApp = VirtualGamepadApp.for("mobile");
+        }
+        this.virtualGamepadApp.render(true);
+    }
+
+    private _closeVirtualGamepad(){
+        if(!this.virtualGamepadApp) {
+            this.virtualGamepadApp = VirtualGamepadApp.for("mobile");
+        }
+        this.virtualGamepadApp.close();
+    }
+
+
+    private _hideCanvas(){
+        $("canvas").hide();
+        $("#ui-left").css({"visibility":"hidden"});
+        this.interval = window.setInterval(()=>$("#dice-box-canvas").hide(),500);
+    }
+
+    private _showCanvas(){
+        $("canvas").show();
+        $("#dice-box-canvas").show();
+        $("#ui-left").css({"visibility":"visible"});
+         window.clearInterval(this.interval);
+    }
 
 }

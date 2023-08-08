@@ -1,3 +1,31 @@
+
+.beavers-mobile.virtual-gamepad{
+    width:140px;
+    height:140px;
+    border-radius:20px;
+    z-index:1000;
+    border:1px groove white;
+    position:absolute;
+    top:0px;
+    left:0px;
+    background-color:rgba(0,0,0,0.1)
+}
+
+.beavers-mobile.virtual-gamepad .drag{
+    position:absolute;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    width: 40px;
+    height: 40px;
+    border-radius:20px;
+    background: red;
+    cursor:move;
+    top:50px;
+    left:50px
+}
+
+
 .beavers-mobile.sheet.actor.character {
     min-width:300px;
     width:500px;

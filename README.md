@@ -9,19 +9,22 @@ The aim is that the players play on the screen while using their devices to inte
 I do not want a lan party so best would be if they do not have any canvas at all rendered on their devices.
 The Map is shown on a table screen and that is the place where communication should happen.
 
-players view on tablet
+## Features
+
+- Dnd5e slim mobile sheet 500px that works good on 90 degrees rotated tablets
+  - token movement via sheet on click or touch on char-image and using it like a gamepad control-stick
+
 ![img.png](pictures/main.png)
 
+- VirtualGamepad to control an actor
+  - you can register a gamepad stick and then configure it using [beavers-gamepad](https://github.com/AngryBeaver/beavers-gamepad)
 
-## Features
-- targeting without canvas 
+![virtualgamepad.png](pictures/virtualgamepad.png)
+- targeting without canvas
 
 ![img.png](pictures/img.png)
-- slim mobile sheet 500px that works good on 90 degrees rotated tablets
-- token movement via sheet on click or touch on char-image and using it like a 
-  - ! gamepad control-stick
 
-![img.png](img.png)
+
 ## Similar Modules
 ### Overall
 [DDB-GameLog](https://github.com/IamWarHead/ddb-game-log)
