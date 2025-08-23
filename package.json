@@ -1,9 +1,11 @@
 {
 	"name": "beavers-mobile",
 	"title": "Beaver's Mobile",
-	"version": "1.0.1",
+	"version": "2.0.0",
 	"description": "A Module to enhance playing locally with sheets on tablets and map screen.#Local Coop",
-	"devDir": "C:\\Users\\Riess\\AppData\\Local\\FoundryVTT\\Data\\modules",
+    "devDir": "c:\\vtts\\v13.347\\Data\\modules",
+    "#devDir": "c:\\vtts\\v12.331\\Data\\modules",
+    "#devDir": "c:\\vtts\\v11.315\\Data\\modules",
 	"main": "src/main.js",
 	"scripts": {
 		"build": "npx gulp",
@@ -23,10 +25,11 @@
 		"printWidth": 120
 	},
 	"devDependencies": {
-		"beavers-system-interface": "^2.1.4",
-		"@ethaks/fvtt-quench": "^0.6.0",
-		"@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
+		"@league-of-foundry-developers/foundry-vtt-types": "^13.346.0-beta",
 		"@types/jest": "^27.4.1",
+		"@types/jquery": "^3.5.32",
+		"beavers-system-interface": "^2.3.1",
+        "beavers-gamepad": "^2.0.0",
 		"del": "^6.0.0",
 		"gulp": "^4.0.2",
 		"gulp-cli": "^2.3.0",
@@ -40,9 +43,9 @@
 		"json-stringify-pretty-compact": "^3.0.0",
 		"karma-cli": "^2.0.0",
 		"prettier": "^2.7.1",
-		"typescript": "^4.6.3"
+		"typescript": "^5.9.2"
 	},
 	"dependencies": {
-		"save-dev": "^0.0.1-security"
+
 	}
 }

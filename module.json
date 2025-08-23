@@ -2,7 +2,7 @@
   "title": "Beaver's Mobile Enhancements",
   "description": "A Module to enhance playing locally with sheets on tablets and map screen.#Local Coop",
   "id": "beavers-mobile",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "authors": [
     {
       "name": "angryBeaver",
@@ -36,8 +36,8 @@
         "type": "module",
         "manifest": "https://github.com/AngryBeaver/beavers-system-interface/releases/latest/download/module.json",
         "compatibility": {
-          "minimum" : "2.1.4",
-          "verified": "2.1.4"
+          "minimum" : "2.3.1",
+          "verified": "2.3.1"
         }
       }
     ],
@@ -47,13 +47,13 @@
         "type": "module",
         "manifest": "https://github.com/AngryBeaver/beavers-gamepad/releases/latest/download/module.json",
         "compatibility": {
-          "verified": "1.0.3"
+          "verified": "3.0.0"
         }
       }
     ]
   },
   "compatibility": {
-    "minimum": "10",
-    "verified": "11"
+    "minimum": "13",
+    "verified": "13.347"
   }
 }

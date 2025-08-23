@@ -12,6 +12,20 @@
       "virtualGamepad": {
         "name": "enable VirtualGamepad",
         "hint": "This will enable one virtualGamepad controller stick. Combined with beavers-gamepad you can use this to control a token"
+      },
+      "disableItemDrag": {
+        "saved": "item-dragging-disabled users updated.",
+        "users": {
+          "name": "item-dragging-disabled",
+          "label": "Select users to disable item dragging",
+          "notes": "Only these users will be prevented from dragging items"
+        },
+        "menu": {
+          "name": "Disable item dragging",
+          "label": "disable item dragging",
+          "hint": "Open a dialog to pick which users disable item dragging.",
+          "title": "Disabled item dragging"
+        }
       }
     }
   }

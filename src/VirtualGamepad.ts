@@ -1,6 +1,7 @@
 import {GamepadSimulator} from "./GamepadSimulator.js";
+import {event} from "jquery";
 
-export class VirtualGamepad implements Gamepad {
+export class VirtualGamepad implements VirtualGamepadI {
 
     static _index = 0;
 
@@ -99,6 +100,7 @@ export class VirtualGamepad implements Gamepad {
         this._id = id;
         this._index = GamepadSimulator.addVirtualGamepad(this);
         const event = new Event("gamepadconnected");
+        // @ts-ignore
         event["gamepad"] = this;
         window.dispatchEvent(event);
     }
@@ -131,6 +133,7 @@ export class VirtualGamepad implements Gamepad {
 
     destroy(){
         const event = new Event("gamepaddisconnected");
+        // @ts-ignore
         event["gamepad"] = this;
         window.dispatchEvent(event);
         GamepadSimulator.removeVirtualGamepad(this);

@@ -1,26 +1,26 @@
-import {VirtualGamepad as VG} from "./VirtualGamepad.js";
+import {VirtualGamepad} from "./VirtualGamepad.js";
 
-export class VirtualGamepadApp extends Application{
+export class VirtualGamepadApp extends  foundry.applications.api.ApplicationV2 {
 
-    touchNow:Touch;
-    touchStart:Touch
-    isDragged:boolean;
-    virtualGamepad:VirtualGamepad;
+    touchNow: Touch | undefined;
+    touchStart: Touch | undefined
+    isDragged: boolean | undefined;
+    virtualGamepad:VirtualGamepadI;
     startAxes:number;
 
     static for(id:string){
-        const vg = new VG(id);
+        const vg = new VirtualGamepad(id);
         return new VirtualGamepadApp(vg);
     }
 
-    constructor(virtualGamepad:VirtualGamepad,startAxes:number=0) {
+    constructor(virtualGamepad:VirtualGamepadI,startAxes:number=0) {
         super({id:virtualGamepad.id});
         this.virtualGamepad = virtualGamepad;
         this.startAxes = startAxes;
     }
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return mergeObject(super.DEFAULT_OPTIONS, {
             // @ts-ignore
             template: "modules/beavers-mobile/templates/gamepad-overlay.hbs",
             classes: ["beavers-mobile"],
@@ -42,7 +42,9 @@ export class VirtualGamepadApp extends Application{
         $(html).find(".drag").on("touchmove",(e:Event)=>{
             if(this.isDragged) {
                 this.touchNow = this._getTouchFrom(e);
+                // @ts-ignore
                 const x = Math.max(0,Math.min(50+this.touchNow.clientX-this.touchStart.clientX,100));
+                // @ts-ignore
                 const y = Math.max(0,Math.min(50+this.touchNow.clientY-this.touchStart.clientY,100));
                 $(html).find(".drag").css({"top": y, "left": x});
                 this.virtualGamepad.setAxes(this.startAxes,(x-50)/50);

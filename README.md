@@ -12,18 +12,19 @@ The Map is shown on a table screen and that is the place where communication sho
 ## Features
 - VirtualGamepad to control an actor
   - you can register a gamepad stick and then configure it using [beavers-gamepad](https://github.com/AngryBeaver/beavers-gamepad)
-
-![virtualgamepad.png](pictures/virtualgamepad.png)
-
-- Dnd5e slim mobile sheet 500px that works good on 90 degrees rotated tablets
-  - token movement via sheet on click or touch on char-image and using it like a gamepad control-stick
-
-![img.png](pictures/main.png)
+  
+  ![virtualgamepad.png](pictures/virtualgamepad.png)
 
 - targeting without canvas
 
-![img.png](pictures/img.png)
+  ![img.png](pictures/img.png)
 
+- Disable item dragging (Foundry v13, ApplicationV2 compatible)
+    - GM can enable a world setting to prevent item dragging from actor sheets for selected users.
+    - Especially useful on mobile to avoid accidental item drags that duplicate items while scrolling
+
+- Hide canvas (Foundry v13, ApplicationV2 compatible)
+    - GM can enable a world setting to hide the canvas for selected users.
 
 ## Similar Modules
 ### Overall

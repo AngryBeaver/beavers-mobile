@@ -1,3 +1,9 @@
+# 2.0.0
+- Add Compatibility with applicationV2 
+- Remove tiny dnd5e sheet the latest dnd5e is quite good for mobiles.
+- New: Disable item dragging for selected users. 
+  - Prevents dragging items from actor sheets (ApplicationV2 compatible) and the Items directory; helpful on mobile to avoid accidental duplication while scrolling. 
+  - Configurable via world setting and a "Configure restricted users" submenu.
 # 1.0.1
 - fix bug in non dnd5e systems.
 # 1.0.0

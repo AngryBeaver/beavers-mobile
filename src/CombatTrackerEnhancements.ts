@@ -1,18 +1,18 @@
 import {Settings} from "./Settings.js";
-
+// @ts-ignore
+import {CombatConfigurationData} from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client/data/_types";
 export class CombatTrackerEnhancements {
     app;html;combatants;canvas;
 
-    constructor(app,html,data){
+    constructor(app: Application,html: JQuery<HTMLElement>,data: CombatConfigurationData){
         this.app = app;
-        this.html = html;
+        this.html = $(html);
         this.combatants = data.combat.combatants;
-        // @ts-ignore
         this.canvas = canvas;
     }
 
 
-    static bind(app, html, data) {
+    static bind(app:Application, html: JQuery<HTMLElement>, data: CombatConfigurationData) {
         if (Settings.get(Settings.ADD_COMBAT_TRACKER_TARGET)) {
             new CombatTrackerEnhancements(app,html,data).init();
         }
@@ -45,13 +45,13 @@ export class CombatTrackerEnhancements {
         });
     }
 
-    _getToken(element){
+    _getToken(element: JQuery<HTMLElement>){
         const combatId = element.closest(".combatant").data("combatant-id");
         const tokenId = this.combatants.get(combatId).tokenId;
-        return this.canvas?.tokens?.objects?.children.find(token => token.id === tokenId);
+        return this.canvas?.tokens?.objects?.children.find((token: { id: any; }) => token.id === tokenId);
     }
 
-    _targetToken(token) {
+    _targetToken(token: any) {
         if (!token) {
             return;
         }
