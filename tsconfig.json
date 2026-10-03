@@ -1,40 +1,15 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "target": "es2022",
-    "module": "es2022",
-    "lib": [
-      "DOM",
-      "ES2021"
-    ],
-    "allowJs": true,
-    "sourceMap": false,
-    "outDir": "./dist/src",
-    "strict": false,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["DOM", "ES2022"],
+    "types": ["node"],
+    "strict": true,
     "noImplicitAny": false,
-    "strictNullChecks": false,
-    "noImplicitThis": false,
-    "noImplicitReturns": true,
-    "moduleResolution": "node",
-    "typeRoots" : [
-      "./node_modules/@types",
-      "./src/types",
-      "./node_modules"
-    ],
-    "types": [
-      "beavers-gamepad/src",
-      "@league-of-foundry-developers/foundry-vtt-types"
-    ],
-    "newLine": "lf",
+    "noEmit": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.js"
-  ],
-  "exclude": [
-    "./templates/**/*"
-  ]
+  "include": ["src", "test"]
 }

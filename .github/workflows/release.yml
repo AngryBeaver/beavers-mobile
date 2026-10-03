@@ -1,0 +1,68 @@
+name: Release
+
+# A commit on main whose message starts with "release v1.2.3" builds the module as version 1.2.3 and publishes it
+# as the GitHub release v1.2.3. Foundry's manifest URL points at the latest release, so users get the update.
+
+on:
+  push:
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.head_commit.message, 'release v')
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from commit message
+        id: version
+        env:
+          MSG: ${{ github.event.head_commit.message }}
+        run: |
+          VERSION=$(echo "$MSG" | head -1 | grep -oP 'v\d+\.\d+\.\d+')
+          if [ -z "$VERSION" ]; then
+            echo "Could not parse version from commit message: $MSG"
+            exit 1
+          fi
+          echo "tag=$VERSION" >> $GITHUB_OUTPUT
+          echo "num=${VERSION#v}" >> $GITHUB_OUTPUT
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Set version in package.json
+        run: npm pkg set version=${{ steps.version.outputs.num }}
+
+      - name: Build release zip
+        run: pnpm release
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.tag }}
+          make_latest: true
+          generate_release_notes: true
+          files: |
+            package/beavers-mobile.zip
+            package/module.json

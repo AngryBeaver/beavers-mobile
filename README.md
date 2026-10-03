@@ -1,65 +1,54 @@
-# Beaver's Mobile Enhancements
-![Foundry Core Compatible Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fversion%3Fstyle%3Dflat%26url%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2FAngryBeaver%2Fbeavers-mobile%2Fmain%2Fmodule.json)
-![Foundry System](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fsystem%3FnameType%3Draw%26showVersion%3D1%26style%3Dflat%26url%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2FAngryBeaver%2Fbeavers-mobile%2Fmain%2Fmodule.json)
+# Beaver's Mobile
+![Foundry Core Compatible Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fversion%3Fstyle%3Dflat%26url%3Dhttps%3A%2F%2Fgithub.com%2FAngryBeaver%2Fbeavers-mobile%2Freleases%2Flatest%2Fdownload%2Fmodule.json)
+![Foundry System](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fsystem%3FnameType%3Draw%26showVersion%3D1%26style%3Dflat%26url%3Dhttps%3A%2F%2Fgithub.com%2FAngryBeaver%2Fbeavers-mobile%2Freleases%2Flatest%2Fdownload%2Fmodule.json)
 ![Latest Release Download Count](https://img.shields.io/github/downloads/AngryBeaver/beavers-mobile/total?color=bright-green)
+![Lint & Test](https://github.com/AngryBeaver/beavers-mobile/actions/workflows/lint.yml/badge.svg)
 
-Beavers-mobile is a module to enhance playing locally with foundry on a map screen while players join with tablets.
-The aim is that the players play on the screen while using their devices to interact.
+The **dnd5e character sheet in a mobile edition**: one column, as wide as a phone.
 
-I do not want a lan party so best would be if they do not have any canvas at all rendered on their devices.
-The Map is shown on a table screen and that is the place where communication should happen.
+dnd5e's character sheet needs a window of at least 800px. A phone has 360 to 430. This module adds a second
+character sheet that is dnd5e's own sheet (same data, same buttons, same rolls) laid out for that width:
 
-## Features
-- VirtualGamepad to control an actor
-  - you can register a gamepad stick and then configure it using [beavers-gamepad](https://github.com/AngryBeaver/beavers-gamepad)
-  
-  ![virtualgamepad.png](pictures/virtualgamepad.png)
+- **Full screen** on a phone, a 400px window everywhere else.
+- **One column** that scrolls as a whole: character card (portrait beside armor class, initiative, speed, hit points,
+  hit dice), ability scores, favorites, then skills, saving throws and traits.
+- **Tabs along the bottom**, under your thumb, instead of outside the window's right edge.
+- Inventory, features, spells and effects use the full width. dnd5e's item lists drop columns by themselves when
+  they are narrow.
 
-- targeting without canvas
+## How it works
 
-  ![img.png](pictures/img.png)
+- **On a phone** (a screen up to 600px wide) every character opens in the mobile sheet, and the character assigned
+  to your user opens right after login. Nothing is changed on the actor: the same character opens in its normal
+  sheet on a desktop at the same time.
+- **Per device** you can change that in *Game Settings -> Module Settings -> Character sheet on this device*:
+  on phones only (default), always, or never.
+- **Per character** the sheet is also in Foundry's sheet configuration as *Mobile Character Sheet*, for any device.
 
-- Disable item dragging (Foundry v13, ApplicationV2 compatible)
-    - GM can enable a world setting to prevent item dragging from actor sheets for selected users.
-    - Especially useful on mobile to avoid accidental item drags that duplicate items while scrolling
+The size of the mobile sheet is never stored, so it does not change the size your desktop sheet opens in.
 
-- Hide canvas (Foundry v13, ApplicationV2 compatible)
-    - GM can enable a world setting to hide the canvas for selected users.
+## Compatibility
 
-## Similar Modules
-### Overall
-[DDB-GameLog](https://github.com/IamWarHead/ddb-game-log)
-- has a gamesheet that can interact with foundry.
-- has limitations as you are not able to target and thus using automation modules or move. 
-### Targeting
-[midi-qol](https://gitlab.com/tposney/midi-qol)
-- Can enable late targeting that would allow targeting without canvas but it is currently broken.
-### Moving
-[mobile-token-movement-controls](https://gitlab.com/MatthijsKok/mobile-token-movement/-/blob/main/scripts/mobile-token-movement-controls.js)
-- Allow moving your token but not on char-sheet and collision is not detected correctly.
+- Foundry v13 and v14.
+- dnd5e 5.x and 6.x, checked against 5.3.3 and 6.0.5. Both versions build the character sheet from the same parts
+  and class names, the module relies on nothing else.
 
+Only the character sheet has a mobile edition. NPC, vehicle, group and item sheets stay as dnd5e makes them.
 
-## Troubleshooting
-### Disable canvas CoreSetting
-Disable canvas will break mostly all interaction with tokens e.g. attacking,targeting etc. 
-that is why this module comes with a hide canvas option.
-### Black Screen on mobile devices
-if you have a blackbox covering your screen or parts of it try to disable all 3d modules like dice so nice.
-You need to disable them for the mobile devicecs if possible then you can turn it on again for the main screen.
-### Messed up styles
-it is not that good in combination with [mobile improvements](https://gitlab.com/fvtt-modules-lab/mobile-improvements)
-which is a way better mobile module than mine but it just did not fit me.
-### Can't login on mobile
-Sometime mobile devices have problem when logging into foundry. The trick is do not hit enter after password. While the keyboard popup is still up press the login button. That at least helped me on some devices. 
+Version 3 is a new module: the virtual gamepad, targeting without canvas, hiding the canvas and blocking item
+drags of version 2 are gone. For in-person play with the map on a table screen see
+[Beaver's Mobile Pawn](https://github.com/AngryBeaver/beavers-mobile-pawn), it shows whatever sheet the character
+opens, so also this one.
 
-## Modules you should consider to enable
-### TouchVTT
-This is the main module for mobile devices to make touch screens functional.
-### MidiQol
-This is a module to automate attack and damage. My suggestion is to use maximal automation with it so the user devices do not need to confirm any other popup.
-Also when this issue is solved: https://gitlab.com/tposney/midi-qol/-/issues/1053. The gamemaster or map device should be able to draw the MeasuredTemplate for spells that require it.(as this module intent that the user device does not need canvas at all).
+## Development
 
+```
+pnpm install
+pnpm test          # unit tests
+pnpm typecheck
+pnpm devwatch      # builds into devDir from package.json
+pnpm release       # zip in package/
+```
 
-
-# Credits
-project structure is copied from midi-qol (gulpfile,package.json,tsconcig.json)
+The layout is `css/mobile-sheet.css` alone. `src/sheet.ts` is dnd5e's sheet with one more class and the ability
+scores moved into the scrolling column.

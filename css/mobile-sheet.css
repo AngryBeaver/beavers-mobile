@@ -1,0 +1,285 @@
+/* dnd5e's character sheet in one column, for a window as wide as a phone (360px and up).
+ * Written against dnd5e.css of dnd5e 6.0.5 and 5.3.3. Every rule starts with dnd5e's own
+ * ".dnd5e2.sheet.actor.character" plus ".beavers-mobile", so it wins over the rule it replaces whatever the
+ * order the stylesheets load in.
+ */
+
+/* ---------------------------------- */
+/*  Window                            */
+/* ---------------------------------- */
+
+/* dnd5e: min-width 800px, min-height 700px (600px for limited sheets) */
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.minimized, .minimizing, .maximizing),
+.dnd5e2.sheet.actor.character.beavers-mobile.limited:not(.minimized, .minimizing, .maximizing) {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* A phone: the sheet is the screen. Foundry positions a window with inline styles, hence !important.
+ * 600px is PHONE_MAX_WIDTH in src/core/mode.ts. */
+@media (max-width: 600px) {
+  .dnd5e2.sheet.actor.character.beavers-mobile {
+    position: fixed;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+  }
+  .dnd5e2.sheet.actor.character.beavers-mobile::after,
+  .dnd5e2.sheet.actor.character.beavers-mobile .window-content {
+    border-radius: 0;
+  }
+}
+
+.dnd5e2.sheet.actor.character.beavers-mobile .window-content {
+  padding-inline: 0;
+}
+
+/* ---------------------------------- */
+/*  Sheet Header                      */
+/* ---------------------------------- */
+
+/* dnd5e: 170px high, the right column 280px wide. The window's own controls lie over its top. */
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-header {
+  flex: 0 0 auto;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  padding: 34px 10px 8px 12px;
+  border-radius: 0;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-header > .left {
+  padding: 0 8px 0 0;
+  min-width: 0;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-header .document-name {
+  font-size: var(--font-size-28) !important;
+  letter-spacing: 1px;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-header input.document-name {
+  width: 100%;
+  padding: 2px 6px;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-header > .right {
+  --level-size: 56px;
+  --padding-right: 0px;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-header > .right .level-badge {
+  font-size: var(--font-size-24);
+}
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-header > .right > div:last-child {
+  margin-top: 0;
+}
+/* The rest buttons, left of the level badge */
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-header > .right > div:last-child .sheet-header-buttons {
+  top: 14px;
+  left: 0;
+}
+
+/* ---------------------------------- */
+/*  Sheet Body                        */
+/* ---------------------------------- */
+
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body {
+  border-radius: 0;
+  min-height: 0;
+}
+
+/* dnd5e: a grid, the 230px sidebar beside the tab. Here one column that scrolls as a whole:
+ * character card, ability scores, favorites, tab. */
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.limited) .sheet-body .main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+  margin-inline-end: 0;
+  scrollbar-gutter: auto;
+  overscroll-behavior: contain;
+  transition: none;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .main-content > .tab-body {
+  order: 3;
+  flex: 1 0 auto;
+  min-width: 0;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile.tab-details .tab-body {
+  padding-top: 0;
+}
+
+/* Sidebar: its card and favorites become rows of the column, on the details tab only. dnd5e's collapsing of the
+ * sidebar (stored per user and tab, shared with the desktop sheet) has no meaning here. */
+.dnd5e2.sheet.actor.character.beavers-mobile.tab-details .sheet-body .main-content > .sidebar {
+  display: contents;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile:not(.tab-details) .sheet-body .main-content > .sidebar {
+  display: none;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .sidebar .card .card-tab.collapser {
+  display: none;
+}
+
+/* Character card: the portrait beside the stats instead of above them */
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .sidebar .card {
+  order: 0;
+  flex: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .sidebar .card .portrait > img,
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .sidebar .card .portrait > video {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  max-height: none;
+  min-height: 0;
+  margin: 0;
+  border-radius: 3px 0 0 3px;
+  border-bottom: none;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .sidebar .card .portrait::after {
+  inset: 6px;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .sidebar .card .stats {
+  padding-top: 0.25rem;
+}
+
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .sidebar .favorites {
+  order: 2;
+  flex: none;
+}
+
+/* ---------------------------------- */
+/*  Ability Scores                    */
+/* ---------------------------------- */
+
+/* dnd5e lays them over the header. src/sheet.ts moved them into the column, here they become a row of it.
+ * Six tiles of 64px do not fit a 360px phone, zoom keeps a tile's proportions. */
+.dnd5e2.sheet.actor.character.beavers-mobile .ability-scores {
+  order: 1;
+  flex: none;
+  position: static;
+  pointer-events: auto;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .ability-scores .rows,
+.dnd5e2.sheet.actor.character.beavers-mobile .ability-scores.optional-ability-0 .rows {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 6px;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .ability-scores .rows > div {
+  gap: 0;
+  justify-content: space-around;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .ability-scores .rows > .top {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .ability-scores .ability-score {
+  zoom: 0.84;
+}
+
+/* ---------------------------------- */
+/*  Details                           */
+/* ---------------------------------- */
+
+/* dnd5e: skills 260px wide beside everything else */
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .tab-body .col-2 {
+  grid-template-columns: minmax(0, 1fr);
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .saves {
+  min-width: 0;
+}
+/* Saving throws above species and background, not beside them */
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .tab-body .col-2 .right .top {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .sheet-body .tab-body .col-2 .right .top > * {
+  flex: none;
+}
+
+/* ---------------------------------- */
+/*  Inventory                         */
+/* ---------------------------------- */
+
+/* The item lists drop columns by themselves when they get narrow. The currencies must share one row. */
+.dnd5e2.sheet.actor.character.beavers-mobile section.currency label {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile section.currency label input {
+  width: 100%;
+}
+
+/* ---------------------------------- */
+/*  Biography                         */
+/* ---------------------------------- */
+
+/* dnd5e: 520px, three columns */
+.dnd5e2.sheet.actor.character.beavers-mobile .tab[data-tab="biography"] .characteristics {
+  width: auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .tab[data-tab="biography"] > .top {
+  display: block;
+  padding: 0;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .tab[data-tab="biography"] > .middle {
+  flex-direction: column;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile .tab[data-tab="biography"] > .bottom .editor,
+.dnd5e2.sheet.actor.character.beavers-mobile .tab[data-tab="bastion"] .description .editor {
+  min-height: 240px;
+}
+
+/* ---------------------------------- */
+/*  Bastion                           */
+/* ---------------------------------- */
+
+.dnd5e2.sheet.actor.character.beavers-mobile .tab[data-tab="bastion"] .name,
+.dnd5e2.sheet.actor.character.beavers-mobile .tab[data-tab="bastion"] .name input.document-name {
+  font-size: var(--font-size-28) !important;
+}
+/* dnd5e: basic and special facilities side by side */
+.dnd5e2.sheet.actor.character.beavers-mobile .tab[data-tab="bastion"] .contents {
+  grid-template: "a" auto "b" auto "c" auto / minmax(0, 1fr);
+}
+
+/* ---------------------------------- */
+/*  Tabs                              */
+/* ---------------------------------- */
+
+/* dnd5e: a vertical strip outside of the window's right edge. Here a bar along the bottom, under the thumb. */
+.dnd5e2.sheet.actor.character.beavers-mobile nav.tabs,
+.dnd5e2.sheet.actor.character.beavers-mobile nav.tabs.tabs-right {
+  position: static;
+  flex: none;
+  flex-direction: row;
+  width: auto;
+  z-index: auto;
+  border: none;
+  border-top: 1px solid var(--dnd5e-color-gold);
+  border-radius: 0;
+}
+.dnd5e2.sheet.actor.character.beavers-mobile nav.tabs > .item {
+  flex: 1 1 0;
+  height: 36px;
+  margin: 5px 2px;
+}
+/* Not inert like the other tabs' icons: it would take the tap from its tab */
+.dnd5e2.sheet.actor.character.beavers-mobile nav.tabs dnd5e-icon {
+  pointer-events: none;
+}
+
+/* The "+" of inventory, features, spells and effects: above the tab bar */
+.dnd5e2.sheet.actor.character.beavers-mobile .create-child {
+  inset: auto 12px 58px auto;
+}

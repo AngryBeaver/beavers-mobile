@@ -1,51 +1,38 @@
 {
-	"name": "beavers-mobile",
-	"title": "Beaver's Mobile",
-	"version": "2.0.0",
-	"description": "A Module to enhance playing locally with sheets on tablets and map screen.#Local Coop",
-    "devDir": "c:\\vtts\\v13.347\\Data\\modules",
-    "#devDir": "c:\\vtts\\v12.331\\Data\\modules",
-    "#devDir": "c:\\vtts\\v11.315\\Data\\modules",
-	"main": "src/main.js",
-	"scripts": {
-		"build": "npx gulp",
-		"watch": "npx gulp watch",
-		"clean": "npx gulp clean",
-		"devbuild": "npx gulp dev",
-		"devwatch": "npx gulp devWatch",
-		"devclean": "npx gulp devClean",
-		"release": "npx gulp zip",
-		"tag": "git tag -d ${npm_package_name}_${npm_package_version} 2>/dev/null ; git tag ${npm_package_name}_${npm_package_version} && git push -f origin ${npm_package_name}_${npm_package_version}"
-	},
-	"prettier": {
-		"tabWidth": 2,
-		"semi": true,
-		"quoteProps": "consistent",
-		"trailingComma": "all",
-		"printWidth": 120
-	},
-	"devDependencies": {
-		"@league-of-foundry-developers/foundry-vtt-types": "^13.346.0-beta",
-		"@types/jest": "^27.4.1",
-		"@types/jquery": "^3.5.32",
-		"beavers-system-interface": "^2.3.1",
-        "beavers-gamepad": "^2.0.0",
-		"del": "^6.0.0",
-		"gulp": "^4.0.2",
-		"gulp-cli": "^2.3.0",
-		"gulp-minify": "^3.1.0",
-		"gulp-multi-dest": "^1.3.7",
-		"gulp-rename": "^2.0.0",
-		"gulp-sourcemaps": "^3.0.0",
-		"gulp-tabify": "0.0.2",
-		"gulp-typescript": "^6.0.0-alpha.1",
-		"gulp-zip": "^5.0.2",
-		"json-stringify-pretty-compact": "^3.0.0",
-		"karma-cli": "^2.0.0",
-		"prettier": "^2.7.1",
-		"typescript": "^5.9.2"
-	},
-	"dependencies": {
-
-	}
+  "name": "beavers-mobile",
+  "title": "Beaver's Mobile",
+  "version": "3.0.0",
+  "description": "The dnd5e character sheet in a mobile edition: one column, as wide as a phone, full screen on phones.",
+  "devDir": "c:\\vtts\\v14.368\\Data\\modules",
+  "type": "module",
+  "main": "src/main.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "node build.mjs build",
+    "watch": "node build.mjs watch",
+    "clean": "node build.mjs clean",
+    "devbuild": "node build.mjs dev",
+    "devwatch": "node build.mjs devwatch",
+    "release": "node build.mjs zip",
+    "tag": "git tag -d ${npm_package_name}_${npm_package_version} 2>/dev/null ; git tag ${npm_package_name}_${npm_package_version} && git push -f origin ${npm_package_name}_${npm_package_version}",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\""
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "semi": true,
+    "quoteProps": "consistent",
+    "trailingComma": "all",
+    "printWidth": 120
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "archiver": "^7.0.1",
+    "esbuild": "^0.25.1",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "vitest": "^2"
+  },
+  "packageManager": "pnpm@10.33.0"
 }
