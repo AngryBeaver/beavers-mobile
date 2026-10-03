@@ -1,9 +1,8 @@
 # 3.0.0
-A new module, everything of version 2 is removed.
+- Rework of everything what this module once was.
 - The dnd5e character sheet in a mobile edition: one column as wide as a phone, full screen on phones, tabs along the bottom.
-- Phones open characters in it by themselves, without changing the actor. A client setting decides per device.
 - Compatible with dnd5e 5.x and 6.x on Foundry v13 and v14.
-- Removed: virtual gamepad, targeting without canvas, hide canvas, disable item dragging. No dependency on beavers-system-interface anymore.
+- Removed: virtual gamepad, targeting without canvas, hide canvas, disable item dragging.
 - Build with esbuild and pnpm instead of gulp.
 # 2.0.0
 - Add Compatibility with applicationV2 
