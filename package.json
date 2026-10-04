@@ -1,7 +1,7 @@
 {
   "name": "beavers-mobile",
   "title": "Beaver's Mobile",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "The dnd5e character sheet in a mobile edition: one column, as wide as a phone, full screen on phones.",
   "devDir": "c:\\vtts\\v14.368\\Data\\modules",
   "type": "module",
