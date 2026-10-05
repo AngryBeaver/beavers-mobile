@@ -16,6 +16,9 @@ character sheet that is dnd5e's own sheet (same data, same buttons, same rolls) 
 - Inventory, features, spells and effects use the full width. dnd5e's item lists drop columns by themselves when
   they are narrow.
 
+  <img width="409" height="668" alt="image" src="https://github.com/user-attachments/assets/73146502-ae19-4f5c-b828-35615578f01c" />
+
+
 ## How it works
 
 - **On a phone** (a screen up to 600px wide) every character opens in the mobile sheet, and the character assigned
